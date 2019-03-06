@@ -79,13 +79,7 @@ public class MappingAssessment {
 		SortedMap<Integer, String> nameAppear = new TreeMap<Integer, String>();
 		for(String s : names)
 			nameAppear.put(Collections.frequency(names, s), s);
-		int n = nameAppear.lastKey();
-		String name = null;
-		for(Map.Entry<Integer, String> entry : nameAppear.entrySet()) {
-			if(entry.getKey() == n)
-				name = entry.getValue();
-		}
-		return name;
+		return (String)nameAppear.values().toArray()[nameAppear.size()-1];
 	}
 	
 	/**
@@ -110,13 +104,7 @@ public class MappingAssessment {
 		SortedMap<Integer, Integer> appearZip = new TreeMap<Integer, Integer>();
 		for(Student s : students)
 			appearZip.put(Collections.frequency(studentZips, s.getZip()), s.getZip());
-		
-		int n = appearZip.lastKey();
-		int zip = -1;
-		for(Map.Entry<Integer, Integer> entry : appearZip.entrySet()) {
-			if(entry.getKey() == n) 
-				zip = entry.getValue();
-		}
+		int zip = (int) appearZip.values().toArray()[appearZip.size()-1];
 		for(Student stud : students) {
 			if(stud.getZip() == zip)
 				common.add(stud);
