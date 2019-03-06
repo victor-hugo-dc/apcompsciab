@@ -145,15 +145,12 @@ public class MappingAssessment {
 	 * @return Map<String, List<Student>> {"class name":{Student1, Student2}, "class 2":{Student3, Student4"}} 
 	 */
 	public static Map<String, List<Student>> organizeByClass(List<Student> students){
-		ArrayList<String> list = new ArrayList<String>();
-		for(Student s : students) {
-			for(Map.Entry<String, Double> m : s.getGrades().entrySet()) {
-				if(!list.contains(m.getKey()))
-					list.add(m.getKey());
-			}
-		}
-		Map<String, List<Student>> map = new TreeMap<String, List<Student>>();
-		for(String course : list)
+		HashSet<String> classesHM = new HashSet<String>();
+		for(Student s: students)
+			classesHM.addAll(s.getGrades().keySet());
+		ArrayList<String> classes = new ArrayList<String>(classesHM);
+		Map<String, List<Student>> map = new HashMap<String, List<Student>>();
+		for(String course : classes)
 			map.put(course, getStudentsInClass(course, students));
 		return map;
 	}
